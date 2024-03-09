@@ -1,0 +1,51 @@
+class Product:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+class ShoppingCart:
+    def __init__(self):
+        self.items = []
+
+    def add_item(self, product, quantity):
+        self.items.append((product, quantity))
+
+    def remove_item(self, index):
+        if 0 <= index < len(self.items):
+            del self.items[index]
+
+    def calculate_total(self):
+        total = 0
+        for product, quantity in self.items:
+            total += product.price * quantity
+        return total
+
+    def checkout(self):
+        total = self.calculate_total()
+        print("Checkout")
+        print("--------")
+        for product, quantity in self.items:
+            print(f"{product.name} - Quantity: {quantity}")
+        print(f"Total: ${total}")
+        print("Thank you for your purchase!")
+
+def main():
+    product1 = Product("Phone", 500)
+    product2 = Product("Laptop", 1000)
+    product3 = Product("Headphones", 100)
+
+    cart = ShoppingCart()
+
+    cart.add_item(product1, 2)
+    cart.add_item(product2, 1)
+    cart.add_item(product3, 3)
+
+    cart.remove_item(1)
+
+    total = cart.calculate_total()
+    print(f"Total: ${total}")
+
+    cart.checkout()
+
+if __name__ == "__main__":
+    main()
